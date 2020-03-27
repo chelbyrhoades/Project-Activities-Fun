@@ -1,39 +1,40 @@
 var express = require('express');
+var app = express();
 
-var mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+var MongoClient = require('mongodb').MongoClient;
 const cors = require('cors');
-const API_PORT = 3001;
-const Data = require('./data');
-
-const app = express();
-app.use(cors());
-const router = express.Router();
+var str = "";
 
 const url = "mongodb+srv://Software_Eng:Test@cluster0-jgw2a.mongodb.net/Camp_Lincoln?retryWrites=true&w=majority";
 
-mongoose.connect(url, { useNewUrlParser: true });
 
-let db = mongoose.connection;
+//example Post Request for reference
+/*
+app.get('/',  (req, res) => {
+    MongoClient.connect(url,function(err, client) { 
+      if(!err) {
+        console.log("We are connected");
 
-db.once('open', () => console.log('connected to the database'));
+      }
 
-// checks if connection with the database is successful
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+      var db = client.db('Camp_Lincoln');
 
 
-router.get('/getData', (req, res) => {
-  Data.find((err, data) => {
-    if (err) return res.json({ success: false, error: err });
-    return res.json({ success: true, data: data });
+      db.collection('Activity').find({}).toArray(function(err, docs) {
+        // Print the documents returned
+
+        docs.forEach(function(doc) {
+          console.log(doc.camperid);
+        });
+        // Close the DB
+        client.close();
+    });
+    });
+    res.status(200).send("Success");
+
   });
-});
-
-app.use('/api', router);
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+  */
 
 
 
+var server = app.listen(3001, function() {}); 
