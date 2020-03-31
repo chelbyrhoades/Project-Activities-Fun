@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -11,73 +13,40 @@ import Paper from '@material-ui/core/Paper';
 
 class Test  extends Component{
   
-    state = {
-        data: [],
-        id: 0,
-        message: null,
-        camperid: null,
-        ageLimit: null,
-        sizeLimit: null,
-        banList: null,
-        activityPeriod: null,
-        intervalIsSet: false
-       
-      };
+  constructor(props){
+    super(props);
+    this.state = {
+      actvity: {}
+    
+    };
+  }
+    
 
 
-      componentDidMount() {
-        this.getDataFromDb();
-        if (!this.state.intervalIsSet) {
-          let interval = setInterval(this.getDataFromDb, 1000);
-          this.setState({ intervalIsSet: interval });
-        }
-      }
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ actvity: res }))
+      .catch(err => console.log(err));
+  }
+  
+  callApi = async () => {
+    const response = await fetch('http://localhost:3001/');
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    
+    return body;
+  };
+    
 
-      componentWillUnmount() {
-        if (this.state.intervalIsSet) {
-          clearInterval(this.state.intervalIsSet);
-          this.setState({ intervalIsSet: null });
-        }
-      }
-
-      getDataFromDb = () => {
-        fetch('http://localhost:3001/api/getData')
-          .then((data) => data.json())
-          .then((res) => this.setState({ data: res.data }));
-      };
-
+      
       render(){
-        const { data } = this.state;
-        return(
-        <TableContainer>
-      <Table  aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>camperid</TableCell>
-            <TableCell align="right">Age Limit</TableCell>
-            <TableCell align="right">Size Limit</TableCell>
-            <TableCell align="right">Duration</TableCell>
-            <TableCell align="right">Ban List</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-            {/*
-          {data.map(data, index => (
-            <TableRow key={data.id}>
-              <TableCell component="th" scope="row">
-                {data.camperid}
-              </TableCell>
-              <TableCell align="right">{data.ageLimit}</TableCell>
-              <TableCell align="right">{data.sizeLimit}</TableCell>
-              <TableCell align="right">{data.activityPeriod}</TableCell>
-              <TableCell align="right">{data.banList}</TableCell>
-            </TableRow>
-          */}
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
         
+        return(
+          <div>
+            <h1>Hello</h1>
+           <h1> {this.state.actvity.camperid}</h1>
+           <h1>{this.state.actvity.ageLimit}</h1>
+          </div>
 
       )}
 }
