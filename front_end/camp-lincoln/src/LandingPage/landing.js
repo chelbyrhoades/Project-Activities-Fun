@@ -8,7 +8,7 @@ export default class Landing extends Component {
     render(){
 
         return(
-            <h1>Lnding Page</h1>
+            <h1>Landing Page</h1>
         );
 
     }
