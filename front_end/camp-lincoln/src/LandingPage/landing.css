@@ -1,0 +1,16 @@
+.welcomeStatement{
+    margin: 50 0 250;
+    max-width: 500px;
+    font-size: 65px;
+    
+    padding-top: 90px;
+    padding-left: 90px;
+    text-align: flex-start;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.buttonText{
+    font-size:  30px;
+}

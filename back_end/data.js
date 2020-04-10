@@ -14,5 +14,7 @@ const ActivitySchema = new Schema(
   { timestamps: false }
 );
 
+
+
 // export the new Schema so we could modify it using Node.js
 module.exports = mongoose.model("Activity", ActivitySchema);

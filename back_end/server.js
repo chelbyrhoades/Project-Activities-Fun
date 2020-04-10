@@ -16,6 +16,7 @@ app.use(bodyParser.json());
 
 //example Post Request for reference
 
+/*
 app.get('/', async  (req, res) => {
     MongoClient.connect(url,function(err, client) { 
       if(!err){
@@ -34,6 +35,11 @@ app.get('/', async  (req, res) => {
 
     });
   });
+
+
+
+*/
+  
   
 
 

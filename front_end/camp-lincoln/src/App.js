@@ -1,11 +1,17 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import Routes from './routes';
 import Landing from './LandingPage/landing';
+import Navbar from './Navbar/navbar';
+import Account from './Account/account';
 
 function App() {
   return (
-      <Landing/>
+    <div>
+      <Navbar/>
+      <Account/>
+
+      </div>
   );
 }
 
