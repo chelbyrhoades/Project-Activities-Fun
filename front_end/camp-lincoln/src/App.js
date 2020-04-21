@@ -1,16 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
-import Routes from './routes';
-import LandingPage from './LandingPage/landing';
+
 import Navbar from './Navbar/navbar';
 import Account from './Account/account';
-
+import {MyTable} from './Schedule/Schedule'
 function App() {
-  return (
+    //alert("runns");
+    return (
     <div>
-      <Navbar/>
-      <Account/>
-
+      <MyTable/>
       </div>
   );
 }

@@ -2,13 +2,14 @@ import React from "react";
 
 export class LandingPage extends React.Component {
   render() {
+    alert("run");
     return (
       <>
         <div className="container-fluid">
           <div className="jumbotron" style={{height: '95vh'}}>
             <div className="row justify-content-center">
               <div className="col-md-8">
-                <div className="card" style={{margin: '5em', }}> 
+                <div className="card" style={{margin: '5em', }}>
                   <div className="card-header" style={{ textAlign: "center" }}>
                     Welcome!
                   </div>
