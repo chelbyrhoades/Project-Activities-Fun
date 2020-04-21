@@ -2,6 +2,7 @@ import React from "react";
 //import ReactTable from "react-table";
 
 //import SimpleListMenu from '../menu/SimpleMenuListMenu';
+import './Schedule.css'
 class Activity{
 
   constructor(id,name, period, staffnum, maxcampnum, mincampnum,criticalstaff,canteach,canassist,cantdo){
@@ -128,7 +129,8 @@ class Camper{
     this.A5=camperActivityAssingment(this,p5,activites,5);
   }
   showSchedual(){
-    let info=document.getElementById("data");
+    alert("runs");
+    /*let info=document.getElementById("data");
     //alert("this");
     // var newEl = document.createElement('p');
 
@@ -142,7 +144,7 @@ class Camper{
     let text2 = document.createTextNode(this.A2);
     let text3 = document.createTextNode(this.A3);
     let text4 = document.createTextNode(this.A4);
-    let text5 = document.createTextNode(this.A5);
+    let text5 = document.createTextNode(this.A5);*/
 
     /*cell.appendChild(text1);
     cell = row.insertCell();
@@ -260,7 +262,8 @@ function makeButton(camp, campers){
  // var t=React.createTextNode(camp.nName);
   var x =camp.Num;
   //alert('x: '+x);
-  var but=React.createElement("p",{ onClick:campers[x].showSchedual});
+ let t= React.createElement("text",null,camp.nName);
+  let but=React.createElement("p",{ onClick:campers[x].showSchedual}, [camp.nName]);
   //alert("jere");
   //but.appendChild(t);
   //but.setAttribute('id',x);
@@ -306,7 +309,7 @@ function generateTable() {
       //alert((activites[1][j].Name));
       //btn.innerHTML=activites[i][j].Name;
       //btn.setAttribute('id',"dropbtn");
-      let div2 = React.createElement('div',{className:'dropdown-content'},);
+      //let div2 = React.createElement('div',{className:'dropdown-content'},);
       //div2.className='dropdown-content';
 
       var d;
@@ -315,9 +318,10 @@ function generateTable() {
         //alert("name");
         // eslint-disable-next-line no-undef
        // alert(activites[i][j].Roster[d].fName);
-        chils.push(makeButton(activites[i][j].Roster[d],campers));
+        chils.push(makeButton(activites[i][j].Roster[d],campers)); //this line does not work
+        //chils.push(d);
       }
-      div2 = React.createElement('div',{className:'dropdown-content'},chils);
+      let div2 = React.createElement('div',{className:'dropdown-content'},[chils]);
       let div1 = React.createElement('div',{className:'dropdown'},[btn,div2]);
      // div1.appendChild(btn);
       //div1.appendChild(div2);
@@ -342,128 +346,7 @@ function generateTable() {
   }
 
 }
-/*export class MyTable extends React.Component {
-  constructor(props) {
-    super(props);
-    this.Archery1= new Activity("Archery1", "Archery",1,3,5,1,["Will"],["Will"],["Jack"],["Nick"]);
-    // let Archery1= new Activity("archery1", "Archery",1,1,5,3,["William Dunn"],["William Dunn"],["Jack Dunn"],["Nick Dunn"]);
-    this.Riding1= new Activity("Riding1", "Riding",1,1,5,3,["Jack Dunn"],["Jack Dunn"],["Nick Dunn"],["William Dunn"]);
-    this.Rifelry1=new Activity("Rifelry1", "Rifelry",1,1,5,3,["Nick Dunn"],["Nick Dunn"],["Jack Dunn"], ["William Dunn"]);
-    this.activites=[[this.Archery1,this.Riding1,this.Rifelry1],[this.Riding1,this.Archery1,this.Rifelry1],[this.Archery1,this.Riding1,this.Rifelry1],[this.Riding1,this.Archery1,this.Rifelry1],[this.Archery1,this.Riding1,this.Rifelry1]];
-    this.C1= new Counselor("William Dunn","Gopher");
-    this.C2= new Counselor("Jack Dunn","Gopher");
-    this.C3= new Counselor("Nick Dunn","Gopher");
-    this.Counselors=[this.C1,this.C2,this.C3];
-    this.c1= new Camper("01-01","Tom","Dunn","Tommy",0,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c2= new Camper("01-02","Nick","Dunn","Nicky",1,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c3= new Camper("01-03","Pete","Dunn","Peter",2,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c4= new Camper("01-04","Will","Dunn","William",3,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c5= new Camper("01-05","Jack","Dunn","Jack",4,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
 
-    this.campers=[this.c1,this.c2,this.c3,this.c4,this.c5];
-    var i;
-    for(i=0; i<this.campers.length;i++){
-      // eslint-disable-next-line no-undef
-      this.campers[i].A1 = camperActivityAssingment(this.campers[i],this.campers[i].P1,this.activites,1);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A2 = camperActivityAssingment(this.campers[i],this.campers[i].P2,this.activites,2);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A3 = camperActivityAssingment(this.campers[i],this.campers[i].P3,this.activites,3);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A4 = camperActivityAssingment(this.campers[i],this.campers[i].P4,this.activites,4);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A5 = camperActivityAssingment(this.campers[i],this.campers[i].P5,this.activites,5);
-    }
-    // eslint-disable-next-line no-undef
-    counselorActivityAssingment(this.Counselors,this.activites);
-
-  }
-
-
-  createTable = () => {
-
-    let table = []
-    for (let i = 0; i < row1.length; i++) {
-      let children1 = [];
-      let children2 = [];
-      children1.push(<td>{row1[i]}</td>, <td>{<SimpleListMenu />}</td>);
-      children2.push(<td>{row2[i]}</td>, <td>{<SimpleListMenu />}</td>);
-      table.push(<tr>{children1}{children2}</tr>);
-    }
-    return table
-
-  }
-
-  render() {
-    generateTable(this.activites,this.campers);
-    return(
-        <table>
-          {this.createTable()}
-        </table>
-    )
-  }
-
-}*/
-/*export class Schedule extends React.Component {
-
-
-  constructor(props) {
-    super(props);
-    this.Archery1= new Activity("Archery1", "Archery",1,3,5,1,["Will"],["Will"],["Jack"],["Nick"]);
-    // let Archery1= new Activity("archery1", "Archery",1,1,5,3,["William Dunn"],["William Dunn"],["Jack Dunn"],["Nick Dunn"]);
-    this.Riding1= new Activity("Riding1", "Riding",1,1,5,3,["Jack Dunn"],["Jack Dunn"],["Nick Dunn"],["William Dunn"]);
-    this.Rifelry1=new Activity("Rifelry1", "Rifelry",1,1,5,3,["Nick Dunn"],["Nick Dunn"],["Jack Dunn"], ["William Dunn"]);
-    this.activites=[[this.Archery1,this.Riding1,this.Rifelry1],[this.Riding1,this.Archery1,this.Rifelry1],[this.Archery1,this.Riding1,this.Rifelry1],[this.Riding1,this.Archery1,this.Rifelry1],[this.Archery1,this.Riding1,this.Rifelry1]];
-    this.C1= new Counselor("William Dunn","Gopher");
-    this.C2= new Counselor("Jack Dunn","Gopher");
-    this.C3= new Counselor("Nick Dunn","Gopher");
-    this.Counselors=[this.C1,this.C2,this.C3];
-    this.c1= new Camper("01-01","Tom","Dunn","Tommy",0,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c2= new Camper("01-02","Nick","Dunn","Nicky",1,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c3= new Camper("01-03","Pete","Dunn","Peter",2,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c4= new Camper("01-04","Will","Dunn","William",3,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c5= new Camper("01-05","Jack","Dunn","Jack",4,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-
-    this.campers=[this.c1,this.c2,this.c3,this.c4,this.c5];
-    var i;
-    for(i=0; i<this.campers.length;i++){
-      // eslint-disable-next-line no-undef
-      this.campers[i].A1 = camperActivityAssingment(this.campers[i],this.campers[i].P1,this.activites,1);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A2 = camperActivityAssingment(this.campers[i],this.campers[i].P2,this.activites,2);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A3 = camperActivityAssingment(this.campers[i],this.campers[i].P3,this.activites,3);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A4 = camperActivityAssingment(this.campers[i],this.campers[i].P4,this.activites,4);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A5 = camperActivityAssingment(this.campers[i],this.campers[i].P5,this.activites,5);
-    }
-    // eslint-disable-next-line no-undef
-    counselorActivityAssingment(this.Counselors,this.activites);
-
-  }
-
-
-
-
-
-  render(){
-    //alert("running");
-    //return( <p>test</p>);
-
-
-    return ();
-  }
-
-
-}
-
-
-
-//generateTableHead(table, data);
-
-*/
-//import React from 'react';
 
 let id = 0;
 function createData(p1,p2,p3,p4,p5) {
@@ -477,42 +360,7 @@ let rows = [
 let bf;
 
 export class MyTable extends React.Component {
-  /*constructor(props) {
-    super(props);
-    this.Archery1= new Activity("Archery1", "Archery",1,3,5,1,["Will"],["Will"],["Jack"],["Nick"]);
-    // let Archery1= new Activity("archery1", "Archery",1,1,5,3,["William Dunn"],["William Dunn"],["Jack Dunn"],["Nick Dunn"]);
-    this.Riding1= new Activity("Riding1", "Riding",1,1,5,3,["Jack Dunn"],["Jack Dunn"],["Nick Dunn"],["William Dunn"]);
-    this.Rifelry1=new Activity("Rifelry1", "Rifelry",1,1,5,3,["Nick Dunn"],["Nick Dunn"],["Jack Dunn"], ["William Dunn"]);
-    this.activites=[[this.Archery1,this.Riding1,this.Rifelry1],[this.Riding1,this.Archery1,this.Rifelry1],[this.Archery1,this.Riding1,this.Rifelry1],[this.Riding1,this.Archery1,this.Rifelry1],[this.Archery1,this.Riding1,this.Rifelry1]];
-    this.C1= new Counselor("William Dunn","Gopher");
-    this.C2= new Counselor("Jack Dunn","Gopher");
-    this.C3= new Counselor("Nick Dunn","Gopher");
-    this.Counselors=[this.C1,this.C2,this.C3];
-    this.c1= new Camper("01-01","Tom","Dunn","Tommy",0,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c2= new Camper("01-02","Nick","Dunn","Nicky",1,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c3= new Camper("01-03","Pete","Dunn","Peter",2,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c4= new Camper("01-04","Will","Dunn","William",3,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
-    this.c5= new Camper("01-05","Jack","Dunn","Jack",4,['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry'],['Archery','Riding','Rifelry']);
 
-    this.campers=[this.c1,this.c2,this.c3,this.c4,this.c5];
-    var i;
-    for(i=0; i<this.campers.length;i++){
-      // eslint-disable-next-line no-undef
-      this.campers[i].A1 = camperActivityAssingment(this.campers[i],this.campers[i].P1,this.activites,1);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A2 = camperActivityAssingment(this.campers[i],this.campers[i].P2,this.activites,2);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A3 = camperActivityAssingment(this.campers[i],this.campers[i].P3,this.activites,3);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A4 = camperActivityAssingment(this.campers[i],this.campers[i].P4,this.activites,4);
-      // eslint-disable-next-line no-undef
-      this.campers[i].A5 = camperActivityAssingment(this.campers[i],this.campers[i].P5,this.activites,5);
-    }
-    // eslint-disable-next-line no-undef
-    counselorActivityAssingment(this.Counselors,this.activites);
-
-  }
-*/
   render() {
 
     generateTable(this.activites,this.campers);
