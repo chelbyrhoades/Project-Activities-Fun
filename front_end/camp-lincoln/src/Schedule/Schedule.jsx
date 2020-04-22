@@ -76,7 +76,8 @@ let C3= new Counselor("Nick Dunn","Gopher",2);
 let Counselors=[C1,C2,C3];
 //Activity Assignment Functions Camper Needs to run first
 function counselorActivityAssingment(counselors,acts) {
-  var groupOff=prompt("What group has Time off");
+  var groupOff=0;
+      //prompt("What group has Time off");
 
   //fix this make it take into account time off
   //this is incredibly inneficent
@@ -170,8 +171,8 @@ function camperActivityAssingment(Camper, acts, period){
   //Campers Prefrences Are inputed in the prompt menu
   while(true) {
     for (i = 1; i < 4; i++) {
-      prefrences.push(prompt(Camper.ID + " Period " + period + " prefrence " + i + ": "));
-      //prefrences.push("Archery");
+      //prefrences.push(prompt(Camper.ID + " Period " + period + " prefrence " + i + ": "));
+      prefrences.push("Archery");
     }
 
     for (i = 0; i < 3; i++) {
@@ -195,7 +196,7 @@ function camperActivityAssingment(Camper, acts, period){
       }
 
     }
-    alert("All Choices full please enter new options.");
+    //alert("All Choices full please enter new options.");
   }
 
   //}
@@ -433,9 +434,9 @@ function swap(){
 
     //return;
   }
-  else{
-    alert("That Activity is Full");
-  }
+  //else{
+    //alert("That Activity is Full");
+  //}
   schedual();
 
 
