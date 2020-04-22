@@ -9,7 +9,7 @@ function App() {
     //alert("runns");
     return (
 
-    <BrowserRouter>
+        /* <BrowserRouter>
         <div>
         <Navbar/>
           <Switch>
@@ -18,7 +18,9 @@ function App() {
               <Route path="/table" render={() => <MyTable/> } />
           </Switch>
       </div>
-    </BrowserRouter>
+    </BrowserRouter>*/
+        <div> <MyTable/></div>
+
   );
 }
 
