@@ -120,12 +120,12 @@ function counselorActivityAssingment(counselors,acts) {
     }
 
     for (a = 0; a < activites[p].length; a++) {
-      //alert("here");
+   
       var c;
       for (c = 0; c < Counselors.length; c++) {
         //assign counselors to activities based on the number needed and the activities canTeach canAssist CantDo
         var A;
-        // alert("here");
+      
         for (A = 0; A < activites[p][a].Assist.length; A++) {
           if (activites[p][a].Staff.length < activites[p][a].StaffNum) {
 
