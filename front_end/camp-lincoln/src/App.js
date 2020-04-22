@@ -8,8 +8,9 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 function App() {
     //alert("runns");
     return (
-
-    <BrowserRouter>
+        <MyTable/>
+        //this is not working yet
+   /* <BrowserRouter>
         <div>
         <Navbar/>
           <Switch>
@@ -18,7 +19,7 @@ function App() {
               <Route path="/table" render={() => <MyTable/> } />
           </Switch>
       </div>
-    </BrowserRouter>
+    </BrowserRouter>*/
   );
 }
 
