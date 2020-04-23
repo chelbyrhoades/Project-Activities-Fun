@@ -5,8 +5,26 @@ import {Table, TableBody,TableCell, TableHead, TableRow, Button, Container, Grid
 
 //import SimpleListMenu from '../menu/SimpleMenuListMenu';
 import ReactDOM from 'react-dom'
+import CSVReader from "react-csv-reader";
 import './Schedule.css'
 //function schedual();
+
+
+
+const handleForce = data => {
+  console.log(data);
+};
+
+const reader = (
+    <div className="container">
+      <CSVReader
+          cssClass="react-csv-input"
+          label="Select CSV with secret Death Star statistics"
+          onFileLoaded={handleForce}
+      />
+      <p>and then open the console</p>
+    </div>
+);
 class Activity{
 
   constructor(id,name, period, staffnum, maxcampnum, mincampnum,teachingstaff,assist,cantdo,cpas){
