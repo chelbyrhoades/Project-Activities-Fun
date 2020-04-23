@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    paddingBottom: '10px'
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -29,7 +30,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Camp Lincoln
           </Typography>
-          <Button color="inherit">Login</Button>
+          
         </Toolbar>
       </AppBar>
     </div>

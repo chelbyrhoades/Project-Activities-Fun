@@ -1,4 +1,6 @@
 import React from "react";
+import NavBar from '../Navbar/navbar';
+import {Table, TableBody,TableCell, TableHead, TableRow, Button, Container, Grid, ButtonGroup} from '@material-ui/core';
 //import ReactTable from "react-table";
 
 //import SimpleListMenu from '../menu/SimpleMenuListMenu';
@@ -241,21 +243,22 @@ function staffList(){
   for(i=0;i<Counselors.length;i++){
     CList.push(createStaffList(Counselors[i].Name,Counselors[i].A1.Name,Counselors[i].A2.Name,Counselors[i].A3.Name,Counselors[i].A4.Name,Counselors[i].A5.Name));
   }
-  ReactDOM.render(<table>
-    <tr><tb ><button onClick={schedual}>Back to Schedual</button></tb></tr>
-    <tr><th>Name</th><th>Activity 1</th><th>Activity 2</th><th>Activity 3</th><th>Activity 4</th><th>Activity 5</th></tr>
+  ReactDOM.render(
+  <Table>
+    <TableRow><tb ><Button onClick={schedual}>Back to Schedual</Button></tb></TableRow>
+    <TableRow><TableHead>Name</TableHead><TableHead>Activity 1</TableHead><TableHead>Activity 2</TableHead><TableHead>Activity 3</TableHead><TableHead>Activity 4</TableHead><TableHead>Activity 5</TableHead></TableRow>
     {CList.map(row => (
-        <tr key={row.id}>
-          <td>{row.Name}</td>
-          <td>{row.P1}</td>
-          <td>{row.P2}</td>
-          <td>{row.P3}</td>
-          <td>{row.P4}</td>
-          <td>{row.P5}</td>
+        <TableRow key={row.id}>
+          <TableCell>{row.Name}</TableCell>
+          <TableCell>{row.P1}</TableCell>
+          <TableCell>{row.P2}</TableCell>
+          <TableCell>{row.P3}</TableCell>
+          <TableCell>{row.P4}</TableCell>
+          <TableCell>{row.P5}</TableCell>
 
-        </tr>
+        </TableRow>
     ))}
-  </table>,document.getElementById('root'));
+  </Table>,document.getElementById('root'));
 }
 //Activity Roster
 function roster(act){
@@ -265,20 +268,23 @@ function roster(act){
   for(i=0;i<act.Roster.length;i++){
     rs.push(createroster(act.Roster[i].ID,act.Roster[i].nName,act.Roster[i].lName,act.Roster[i].fName));
   }
-  ReactDOM.render(<table>
-    <tr><tb ><button onClick={schedual}>Back to Schedual</button></tb></tr>
-    <tr><th>OB #</th><th>Nickname</th><th>Last Name</th><th>First</th></tr>
-    {rs.map(row => (
-        <tr key={row.id}>
-          <td>{row.Identity}</td>
-          <td>{row.nN}</td>
-          <td>{row.lN}</td>
-          <td>{row.fN}</td>
 
-        </tr>
+  ReactDOM.render(
+  <Table>
+    <TableRow><tb ><button onClick={schedual}>Back to Schedual</button></tb></TableRow>
+    <TableRow><th>OB #</th><th>Nickname</th><th>Last Name</th><th>First</th></TableRow>
+    {rs.map(row => (
+        <TableRow key={row.id}>
+          <TableCell>{row.Identity}</TableCell>
+          <TableCell>{row.nN}</TableCell>
+          <TableCell>{row.lN}</TableCell>
+          <TableCell>{row.fN}</TableCell>
+
+        </TableRow>
     ))}
-  </table>,document.getElementById('root'));
+  </Table>,document.getElementById('root'));
 }
+
 function showSchedual(c){
   //alert("runs");
   let br=React.createElement('br');
@@ -287,7 +293,7 @@ function showSchedual(c){
 
   // eslint-disable-next-line no-undef
 
-  ReactDOM.render([<button onClick={schedual}>Back to Schedual</button>,<p>Name: {c.nName+" "+c.lName} </p>,
+  ReactDOM.render([<button onClick={schedual}>Back to Schedual</button>,<p>Name: {+" "+c.lName} </p>,
     <p>ID: {c.ID}</p>, <table><tr><th>Period 1</th><th>Period 2</th><th>Period 3</th><th>Period 4</th><th>Period 5</th></tr>
       <tr><td>{c.A1.Name}</td><td>{c.A2.Name}</td><td>{c.A3.Name}</td><td>{c.A4.Name}</td><td>{c.A5.Name}</td></tr>
     </table>],document.getElementById('root'));
@@ -403,15 +409,18 @@ function setup(){
 function search(){
   showSchedual(campers[camperHash[prompt("Enter Camper OB#: ")]]);
 }
+
 function swap(){
   var c=camperHash[prompt("Enter Camper OB#: ")];
   var p=parseInt(prompt("enter period number"))-1;
   var temp=prompt("enter old activity name")+(p+1);
+  
   var a1=activityHash[temp];
   temp=prompt("enter new activity name")+(p+1);
   //alert(temp);
   var a2=activityHash[temp];
   //alert("a2: "+a2+" a1:"+ a1 );
+
   if(activites[p][a2].CurCampNum+1<activites[p][a2].MaxCamperNum){
     for (var i=0;i<activites[p][a1].Roster.length;i++){
       if(activites[p][a1].Roster[i].ID===campers[c].ID){
@@ -430,9 +439,7 @@ function swap(){
       campers[c].A4=activites[p][a2];}
     if(p===4){
       campers[c].A5=activites[p][a2];}
-    //return schedual();
-
-    //return;
+    
   }
   //else{
     //alert("That Activity is Full");
@@ -453,21 +460,35 @@ function schedual(){
     rows.push(createData(row1[bf],row2[bf],row3[bf],row4[bf],row5[bf]));
   }
   ReactDOM.render([
-    <table>
-      <tr><td><button onClick={search}>Search By OB#</button></td><td><button onClick={swap}>Swap Camper Activity</button></td><td><button onClick={staffList}>Staff List</button></td></tr>
-      <tr><th>Period 1</th><th>Period 2</th><th>Period 3</th><th>Period 4</th><th>Period 5</th></tr>
-      {rows.map(row => (
-          <tr key={row.id}>
-            <td>{row.p1}</td>
-            <td>{row.p2}</td>
-            <td>{row.p3}</td>
-            <td>{row.p4}</td>
-            <td>{row.p5}</td>
+    <div>
+      <NavBar/>
+      <Container>
+
+        <ButtonGroup size="large" color="primary" aria-label="large outlined primary button group">
+          <Button onClick={search}>Search By OB#</Button>
+          <Button onClick={swap}>Swap Camper Activity</Button>
+          <Button onClick={staffList}>Staff List</Button>
+      </ButtonGroup>
+        <br/>
+        <br/>
+        <br/>
+
+          <Table>
+          <TableRow><th>Period 1</th><th>Period 2</th><th>Period 3</th><th>Period 4</th><th>Period 5</th></TableRow>
+          {rows.map(row => (
+              <TableRow key={row.id}>
+                <TableCell>{row.p1}</TableCell>
+                <TableCell>{row.p2}</TableCell>
+                <TableCell>{row.p3}</TableCell>
+                <TableCell>{row.p4}</TableCell>
+                <TableCell>{row.p5}</TableCell>
 
 
-          </tr>
-      ))}
-    </table>,],document.getElementById('root'));
+              </TableRow>
+          ))}
+        </Table>
+      </Container>
+    </div>,],document.getElementById('root'));
 }
 export class MyTable extends React.Component {
   //constructer(){
@@ -484,8 +505,14 @@ export class MyTable extends React.Component {
 
     schedual();
     return(
-
-        <p>runs</p>);
+     
+      <div>
+       
+        <br/>
+        <br/>
+        
+        <p>runs</p>
+        </div>);
   }
 
 }
