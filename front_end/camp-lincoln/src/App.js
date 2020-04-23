@@ -10,20 +10,20 @@ function App() {
     return (
 
 
-    <BrowserRouter>
+        <BrowserRouter>
 
-        <div>
-        <Navbar/>
-          <Switch>
-              <Route exact path="/" render={() => <LandingPage />} />
-              <Route path="/account" render={() => <Account/> } />
-              <Route path="/table" render={() => <MyTable/> } />
-          </Switch>
-      </div>
-    </BrowserRouter>
+            <div>
+                <Navbar/>
+                <Switch>
+                    <Route exact path="/" render={() => <LandingPage />} />
+                    <Route path="/account" render={() => <Account/> } />
+                    <Route path="/table" render={() => <MyTable/> } />
+                </Switch>
+            </div>
+        </BrowserRouter>
 
 
-  );
+    );
 }
 
 export default App;
