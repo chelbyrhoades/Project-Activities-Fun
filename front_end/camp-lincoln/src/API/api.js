@@ -1,8 +1,9 @@
 import Axios from 'axios';
+import { any } from 'prop-types';
 
 export default class API{
 
-    URL = "https://localhost:3000";
+    URL = "https://localhost:8000";
 
     getActivities(){
         return new Promise((resolve,reject) => {
@@ -16,7 +17,7 @@ export default class API{
 
     importingCSV(){
         return new Promise((resolve,reject) => {
-                return Axios.post(this.URL + `/csv`, {file})
+                return Axios.post(this.URL + `/csv`, {file:any})
                 .then(resp => resolve(resp.data))
                 .catch(resp => reject(resp));
         })
@@ -33,7 +34,7 @@ export default class API{
 
     addChild(){
         return new Promise((resolve,reject) => {
-            return Axios.post(this.URL + `/camper/addOne`, {data})
+            return Axios.post(this.URL + `/camper/addOne`, {data: any})
             .then(resp => resolve(resp.data))
             .catch(resp => reject(resp));
 

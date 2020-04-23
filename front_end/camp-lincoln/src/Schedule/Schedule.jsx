@@ -1,12 +1,10 @@
 import React from "react";
 import NavBar from '../Navbar/navbar';
 import {Table, TableBody,TableCell, TableHead, TableRow, Button, Container, Grid, ButtonGroup} from '@material-ui/core';
-//import ReactTable from "react-table";
-
-//import SimpleListMenu from '../menu/SimpleMenuListMenu';
+import API from '../API/api';
 import ReactDOM from 'react-dom'
 import './Schedule.css'
-//function schedual();
+
 class Activity{
 
   constructor(id,name, period, staffnum, maxcampnum, mincampnum,teachingstaff,assist,cantdo,cpas){
