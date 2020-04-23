@@ -8,22 +8,22 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 function App() {
     //alert("runns");
     return (
-    <div><MyTable/></div>
-
-        /*<BrowserRouter>
-
-        <div>
-        <Navbar/>
-          <Switch>
-              <Route exact path="/" render={() => <LandingPage />} />
-              <Route path="/account" render={() => <Account/> } />
-              <Route path="/table" render={() => <MyTable/> } />
-          </Switch>
-      </div>
-    </BrowserRouter>*/
 
 
-  );
+        <BrowserRouter>
+
+            <div>
+                <Navbar/>
+                <Switch>
+                    <Route exact path="/" render={() => <LandingPage />} />
+                    <Route path="/account" render={() => <Account/> } />
+                    <Route path="/table" render={() => <MyTable/> } />
+                </Switch>
+            </div>
+        </BrowserRouter>
+
+
+    );
 }
 
 export default App;
