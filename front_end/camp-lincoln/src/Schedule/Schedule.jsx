@@ -171,7 +171,7 @@ function camperActivityAssingment(Camper, acts, period){
   //todo add in a update to counselor
   var prefrences=[];
   //Campers Prefrences Are inputed in the prompt menu
-  while(true) {
+  //while(true) {
     for (i = 1; i < 4; i++) {
       //prefrences.push(prompt(Camper.ID + " Period " + period + " prefrence " + i + ": "));
       prefrences.push("Archery");
@@ -199,7 +199,7 @@ function camperActivityAssingment(Camper, acts, period){
 
     }
     //alert("All Choices full please enter new options.");
-  }
+  //}
 
   //}
 
@@ -215,11 +215,11 @@ class Camper{
     this.fName=Fname;
     this.Num=N;
     N++;
-    this.A1=camperActivityAssingment(this,activites,1);
-    this.A2=camperActivityAssingment(this,activites,2);
-    this.A3=camperActivityAssingment(this,activites,3);
-    this.A4=camperActivityAssingment(this,activites,4);
-    this.A5=camperActivityAssingment(this,activites,5);
+    this.A1='na';
+    this.A2='na';
+    this.A3='na';
+    this.A4='na';
+    this.A5='na';//camperActivityAssingment(this,activites,5);
   }
 
 }
@@ -344,8 +344,8 @@ function generateTable() {
       var name=React.createElement('text',null,activites[i][j].Name);
       var curN=React.createElement('text',null,activites[i][j].CurCampNum);
       var maxN=React.createElement('text',null,activites[i][j].MaxCamperNum);
-      activites[i][j].ID=j;
-      activites[i][j].Period=i;
+     // activites[i][j].ID=j;
+      //activites[i][j].Period=i;
       var btn = btner(activites[i][j]);
 
       var d;
@@ -454,6 +454,10 @@ let oneset=0;
 function schedual(){
   rows=[];
   row1=[];
+  row2=[];
+  row3=[];
+  row4=[];
+  row5=[];
   generateTable();
   for(bf=0;bf<row1.length;bf++){
 
@@ -489,6 +493,20 @@ function schedual(){
         </Table>
       </Container>
     </div>,],document.getElementById('root'));
+}
+function activitySignUps(){
+  var i;
+  for(i=0;i<campers.length;i++){
+    //alert("runs");
+      //campers[i].A1={};
+      campers[i].A1=camperActivityAssingment(campers[i],activites,1);
+      campers[i].A2=camperActivityAssingment(campers[i],activites,2);
+      campers[i].A3=camperActivityAssingment(campers[i],activites,3);
+      campers[i].A4=camperActivityAssingment(campers[i],activites,4);
+      campers[i].A5=camperActivityAssingment(campers[i],activites,5);
+  }
+  
+  schedual();
 }
 export class MyTable extends React.Component {
   //constructer(){
