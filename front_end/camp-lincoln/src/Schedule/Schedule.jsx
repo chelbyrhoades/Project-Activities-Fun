@@ -29,7 +29,7 @@ function go(){
     activitySignUps();
     generateTable();
     setup();
-    oneset=1;}
+    }
 
 
 
@@ -39,17 +39,22 @@ function go1(){
   makeCounselor();
   makeActivity();
   makeCamper();
-  if(oneset==0){
+
+
+  setup();
+  fromStaffList();
+  fromCamperList();
 
     generateTable();
     setup();
-    fromStaffList();
-    fromCamperList();
+
+
+
     //activitySignUps();
     //counselorActivityAssingment(Counselors,activites);
 
 
-    oneset=1;}
+
 
 
 
@@ -70,7 +75,9 @@ const handleForce2 = data => {
 };
 const handleForce3 = data => {
   curData3=(data);
-  ReactDOM.render([<button onClick={ makeitwork}>Staff Roster</button>, <button onClick={go}>New Placements</button>],document.getElementById("root"));
+  ReactDOM.render([ <div><container><ButtonGroup size="large" color="primary" aria-label="large outlined primary button group">
+    <button onClick={ makeitwork}>Staff Roster</button>
+    <button onClick={go}>New Placements</button></ButtonGroup></container></div>],document.getElementById("root"));
 };
 const handleForce4 = data => {
   curData4=(data);
@@ -86,7 +93,7 @@ const reader5 = (
     <div className="container">
       <CSVReader
           cssClass="react-csv-input"
-          label="Select Staff Placment List"
+          label="Select Camper Placment List"
           onFileLoaded={handleForce5}
       />
 
@@ -135,9 +142,13 @@ const reader1 = (
 function fromCamperList(){
   for(var i=0;i<curData5.length;i++){
     for(var j=2;j<curData5[i].length;j++){
-      activites[curData5[i][0]][curData5[i][1]].Roster.push(curData5[i][j]);
+      activites[curData5[i][0]][curData5[i][1]].Roster.push(camperHash[curData5[i][j]]);
+      //alert( activites[curData5[i][0]][curData5[i][1]].Name);
       if(curData5[i][0]==0){
-        campers[camperHash[curData5[i][j]]].A1=activites[curData5[i][0]][curData5[i][1]].Name;}
+
+        campers[camperHash[curData5[i][j]]].A1=activites[curData5[i][0]][curData5[i][1]].Name;
+        //alert(campers[camperHash[curData5[i][j]]].A1);
+         }
       if(curData5[i][0]==1){
         campers[camperHash[curData5[i][j]]].A2=activites[curData5[i][0]][curData5[i][1]].Name;}
       if(curData5[i][0]==2){
@@ -155,7 +166,7 @@ function fromStaffList(){
     for(var j=2;j<curData4[i].length;j++){
       activites[curData4[i][0]][curData4[i][1]].Staff.push(curData4[i][j]);
       if(curData4[i][0]==0){
-      Counselors[counselorHash[curData4[i][j]]].A1=activites[curData4[i][0]][curData4[i][1]].Name;}
+        Counselors[counselorHash[curData4[i][j]]].A1=activites[curData4[i][0]][curData4[i][1]].Name;}
       if(curData4[i][0]==1){
         Counselors[counselorHash[curData4[i][j]]].A2=activites[curData4[i][0]][curData4[i][1]].Name;}
       if(curData4[i][0]==2){
@@ -241,21 +252,21 @@ function makeCounselor(){
   let temp;
   for(var C=1;C<curData1.length;C++){
 
-      for(i=4;i<curData1[C].length;i++){
+    for(i=4;i<curData1[C].length;i++){
 
-        if(curData1[C][i]=='I'){
+      if(curData1[C][i]=='I'){
 
-          AD[ACTS[i-4]].push(curData1[C][1]+" "+curData1[C][0]);
-        }
-        if(curData1[C][i]=='NT'){
-          NT[ACTS[i-4]].push(curData1[C][1]+" "+curData1[C][0]);
-        }
-        else{
-          ASS[ACTS[i-4]].push(curData1[C][1]+" "+curData1[C][0]);
-        }
-        temp = new Counselor(curData1[C][0],curData1[C][1],curData1[C][2]);
+        AD[ACTS[i-4]].push(curData1[C][1]+" "+curData1[C][0]);
       }
-      Counselors.push(temp);
+      if(curData1[C][i]=='NT'){
+        NT[ACTS[i-4]].push(curData1[C][1]+" "+curData1[C][0]);
+      }
+      else{
+        ASS[ACTS[i-4]].push(curData1[C][1]+" "+curData1[C][0]);
+      }
+      temp = new Counselor(curData1[C][0],curData1[C][1],curData1[C][2]);
+    }
+    Counselors.push(temp);
   }
 }
 function makeActivity(){
@@ -291,26 +302,26 @@ function makeActivity(){
         activites[3].push(temp);
       }}
 
-  if(curData2[C][9]=='Y'){
-    let temp= new Activity(curData2[C][0].toLowerCase()+4/*id*/,curData2[C][0].toLowerCase()/*name*/,4/*period*/,curData2[C][3]/*staff num*/,curData2[C][2]/*max*/,curData2[C][1]/*min*/,curData2[C][4],curData2[C][5]);
+    if(curData2[C][9]=='Y'){
+      let temp= new Activity(curData2[C][0].toLowerCase()+4/*id*/,curData2[C][0].toLowerCase()/*name*/,4/*period*/,curData2[C][3]/*staff num*/,curData2[C][2]/*max*/,curData2[C][1]/*min*/,curData2[C][4],curData2[C][5]);
 
-    activites[3].push(temp);
-    if(curData2[C][10]=='C'){
-      activites[4].push(temp);
-    }}
-  if(curData2[C][10]=='Y'){
-    let temp= new Activity(curData2[C][0].toLowerCase()+5/*id*/,curData2[C][0].toLowerCase()/*name*/,5/*period*/,curData2[C][3]/*staff num*/,curData2[C][2]/*max*/,curData2[C][1]/*min*/,curData2[C][4],curData2[C][5]);
+      activites[3].push(temp);
+      if(curData2[C][10]=='C'){
+        activites[4].push(temp);
+      }}
+    if(curData2[C][10]=='Y'){
+      let temp= new Activity(curData2[C][0].toLowerCase()+5/*id*/,curData2[C][0].toLowerCase()/*name*/,5/*period*/,curData2[C][3]/*staff num*/,curData2[C][2]/*max*/,curData2[C][1]/*min*/,curData2[C][4],curData2[C][5]);
 
-    activites[4].push(temp);}
+      activites[4].push(temp);}
   }
   //activities.Teachers
 }
 
 //Activity Assignment Functions Camper Needs to run first
 function counselorActivityAssingment(counselors,acts) {
- // alert("runs");
+  // alert("runs");
   var groupOff=0;
-      //prompt("What group has Time off");
+  //prompt("What group has Time off");
 
   //fix this make it take into account time off
   //this is incredibly inneficent
@@ -326,7 +337,7 @@ function counselorActivityAssingment(counselors,acts) {
         //assign counselors to activities based on the number needed and the activities canTeach canAssist CantDo
         var A;
         // AD/AS assignment
-       //alert( activites[p][a].Name);
+        //alert( activites[p][a].Name);
         for (A = 0; A < AD[ACTS[a]].length; A++) {
           if (Counselors[c].Name == AD[ACTS[a]][A]) {
             //alert("cas");
@@ -356,12 +367,12 @@ function counselorActivityAssingment(counselors,acts) {
     }
 
     for (a = 0; a < activites[p].length; a++) {
-   
+
       var c;
       for (c = 0; c < Counselors.length; c++) {
         //assign counselors to activities based on the number needed and the activities canTeach canAssist CantDo
         var A;
-      
+
         for (A = 0; A < ASS[ACTS[a]].length; A++) {
           if (activites[p][a].Staff.length < activites[p][a].StaffNum) {
 
@@ -370,7 +381,7 @@ function counselorActivityAssingment(counselors,acts) {
                 //this is not the best way to do this but it will work for now
                 activites[p][a].StaffNum++;
               }
-             // alert(Counselors[c].Name);
+              // alert(Counselors[c].Name);
               activites[p][a].Staff.push(Counselors[c].Name);
               //       alert(activites[p][a].Name+" "+Counselors[c].Name);
               //alert(activites[p][a].Name);
@@ -407,33 +418,33 @@ function camperActivityAssingment(Camper, acts, period){
   var prefrences=[];
   //Campers Prefrences Are inputed in the prompt menu
   //while(true) {
-    for (i = 1; i < 4; i++) {
-      //prefrences.push(prompt(Camper.ID + " Period " + period + " prefrence " + i + ": "));
-      prefrences.push("archery");
-    }
+  for (i = 1; i < 4; i++) {
+    //prefrences.push(prompt(Camper.ID + " Period " + period + " prefrence " + i + ": "));
+    prefrences.push(demoTimeSaver(i-1));
+  }
 
-    for (i = 0; i < 3; i++) {
+  for (i = 0; i < 3; i++) {
 
-      var j;
+    var j;
 
-      for (j = 0; j < acts[period - 1].length; j++) {
+    for (j = 0; j < acts[period - 1].length; j++) {
 
-        if (prefrences[i] == acts[period - 1][j].Name) {
-          if (acts[period - 1][j].CurCampNum < acts[period - 1][j].MaxCamperNum) {
-            //var temp;
-            // add camper to the roster of the activity
-            acts[period - 1][j].Roster.push(Camper);
-            //alert(Camper.fName);
-            acts[period - 1][j].CurCampNum = acts[period - 1][j].Roster.length;
-            // return the activity
-            //alert(acts[period-1][j].Name+" "+acts[period-1][j].Roster.length);
-            return acts[period - 1][j];
-          }
+      if (prefrences[i] == acts[period - 1][j].Name) {
+        if (acts[period - 1][j].CurCampNum < acts[period - 1][j].MaxCamperNum) {
+          //var temp;
+          // add camper to the roster of the activity
+          acts[period - 1][j].Roster.push(Camper);
+          //alert(Camper.fName);
+          acts[period - 1][j].CurCampNum = acts[period - 1][j].Roster.length;
+          // return the activity
+          //alert(acts[period-1][j].Name+" "+acts[period-1][j].Roster.length);
+          return acts[period - 1][j];
         }
       }
-
     }
-    //alert("All Choices full please enter new options.");
+
+  }
+  //alert("All Choices full please enter new options.");
   //}
 
   //}
@@ -479,21 +490,21 @@ function staffList(){
     CList.push(createStaffList(Counselors[i].Name,Counselors[i].A1,Counselors[i].A2,Counselors[i].A3,Counselors[i].A4,Counselors[i].A5));
   }
   ReactDOM.render(
-  <Table>
-    <TableRow><tb ><Button onClick={schedual}>Back to Schedual</Button></tb></TableRow>
-    <TableRow><TableHead>Name</TableHead><TableHead>Activity 1</TableHead><TableHead>Activity 2</TableHead><TableHead>Activity 3</TableHead><TableHead>Activity 4</TableHead><TableHead>Activity 5</TableHead></TableRow>
-    {CList.map(row => (
-        <TableRow key={row.id}>
-          <TableCell>{row.Name}</TableCell>
-          <TableCell>{row.P1}</TableCell>
-          <TableCell>{row.P2}</TableCell>
-          <TableCell>{row.P3}</TableCell>
-          <TableCell>{row.P4}</TableCell>
-          <TableCell>{row.P5}</TableCell>
+      <Table>
+        <TableRow><tb ><Button onClick={schedual}>Back to Schedual</Button></tb></TableRow>
+        <TableRow><TableHead>Name</TableHead><TableHead>Activity 1</TableHead><TableHead>Activity 2</TableHead><TableHead>Activity 3</TableHead><TableHead>Activity 4</TableHead><TableHead>Activity 5</TableHead></TableRow>
+        {CList.map(row => (
+            <TableRow key={row.id}>
+              <TableCell>{row.Name}</TableCell>
+              <TableCell>{row.P1}</TableCell>
+              <TableCell>{row.P2}</TableCell>
+              <TableCell>{row.P3}</TableCell>
+              <TableCell>{row.P4}</TableCell>
+              <TableCell>{row.P5}</TableCell>
 
-        </TableRow>
-    ))}
-  </Table>,document.getElementById('root'));
+            </TableRow>
+        ))}
+      </Table>,document.getElementById('root'));
 }
 //Activity Roster
 function roster(act){
@@ -505,19 +516,20 @@ function roster(act){
   }
 
   ReactDOM.render(
-  <Table>
-    <TableRow><tb ><button onClick={schedual}>Back to Schedual</button></tb></TableRow>
-    <TableRow><th>OB #</th><th>Nickname</th><th>Last Name</th><th>First</th></TableRow>
-    {rs.map(row => (
-        <TableRow key={row.id}>
-          <TableCell>{row.Identity}</TableCell>
-          <TableCell>{row.nN}</TableCell>
-          <TableCell>{row.lN}</TableCell>
-          <TableCell>{row.fN}</TableCell>
+      <div><container>
+      <Table>
+        <TableRow><tb ><button onClick={schedual}>Back to Schedual</button></tb></TableRow>
+        <TableRow><th>OB #</th><th>Nickname</th><th>Last Name</th><th>First</th></TableRow>
+        {rs.map(row => (
+            <TableRow key={row.id}>
+              <TableCell>{row.Identity}</TableCell>
+              <TableCell>{row.nN}</TableCell>
+              <TableCell>{row.lN}</TableCell>
+              <TableCell>{row.fN}</TableCell>
 
-        </TableRow>
-    ))}
-  </Table>,document.getElementById('root'));
+            </TableRow>
+        ))}
+      </Table></container></div>,document.getElementById('root'));
 }
 
 function showSchedual(c){
@@ -539,13 +551,14 @@ let campers=[];
 function makeCamper(){
   //ReactDOM.render(reader3,document.getElementById("root"));
   //while(w3){
-    //setTimeout(1);
+  //setTimeout(1);
   //}
 
   var b4=parseInt(prompt("What block is it"));
   for(var i=1;i<curData3.length;i++){
 
     let temp=new Camper(curData3[i][0],curData3[i][3],curData3[i][1],curData3[i][2]);
+    camperHash[curData3[i][0]]=i;
     if(b4>=3&&curData3[i][4]=='3W1 CL'){
       campers.push(temp);
     }
@@ -553,6 +566,7 @@ function makeCamper(){
       campers.push(temp);
     }
     if(curData3[i][4]=='4W1 CL'){
+
       campers.push(temp);
     }
   }
@@ -564,7 +578,10 @@ let row3= [];
 let row4= [];
 let row5= [];
 
-
+function demoTimeSaver(i){
+  var j=Math.ceil(Math.random()*(activites[i].length-1));
+  return activites[i][j].Name;
+}
 function makeButton(camp, campers){
 
   //var x =camp.Num;
@@ -589,7 +606,7 @@ function btner(act){
 //let Table=<table id="table"> </table>;
 function generateTable() {
 
-setup();
+  setup();
 
   var i;
   var j;
@@ -601,7 +618,7 @@ setup();
       var name=React.createElement('text',null,activites[i][j].Name);
       var curN=React.createElement('text',null,activites[i][j].CurCampNum);
       var maxN=React.createElement('text',null,activites[i][j].MaxCamperNum);
-     // activites[i][j].ID=j;
+      // activites[i][j].ID=j;
       //activites[i][j].Period=i;
       var btn = btner(activites[i][j]);
 
@@ -678,7 +695,7 @@ function swap(){
   var c=camperHash[prompt("Enter Camper OB#: ")];
   var p=parseInt(prompt("enter period number"))-1;
   var temp=prompt("enter old activity name")+(p+1);
-  
+
   var a1=activityHash[temp];
   temp=prompt("enter new activity name")+(p+1);
   //alert(temp);
@@ -703,10 +720,10 @@ function swap(){
       campers[c].A4=activites[p][a2];}
     if(p===4){
       campers[c].A5=activites[p][a2];}
-    
+
   }
   //else{
-    //alert("That Activity is Full");
+  //alert("That Activity is Full");
   //}
   schedual();
 
@@ -739,12 +756,12 @@ function schedual(){
           <Button onClick={rosterCSVGen}>Gen roster CSV</Button>
           <Button onClick={StaffrosterCSVGen}>Gen Staff Placement CSV</Button>
 
-      </ButtonGroup>
+        </ButtonGroup>
         <br/>
         <br/>
         <br/>
 
-          <Table>
+        <Table>
           <TableRow><th>Period 1</th><th>Period 2</th><th>Period 3</th><th>Period 4</th><th>Period 5</th></TableRow>
           {rows.map(row => (
               <TableRow key={row.id}>
@@ -761,19 +778,19 @@ function schedual(){
       </Container>
     </div>,],document.getElementById('root'));
 }
-        
+
 function activitySignUps(){
   var i;
   for(i=0;i<campers.length;i++){
     //alert("runs");
-      //campers[i].A1={};
-      campers[i].A1=camperActivityAssingment(campers[i],activites,1);
-      campers[i].A2=camperActivityAssingment(campers[i],activites,2);
-      campers[i].A3=camperActivityAssingment(campers[i],activites,3);
-      campers[i].A4=camperActivityAssingment(campers[i],activites,4);
-      campers[i].A5=camperActivityAssingment(campers[i],activites,5);
+    //campers[i].A1={};
+    campers[i].A1=camperActivityAssingment(campers[i],activites,1);
+    campers[i].A2=camperActivityAssingment(campers[i],activites,2);
+    campers[i].A3=camperActivityAssingment(campers[i],activites,3);
+    campers[i].A4=camperActivityAssingment(campers[i],activites,4);
+    campers[i].A5=camperActivityAssingment(campers[i],activites,5);
   }
-  
+
   schedual();
 }
 let rosterArray=[];
@@ -784,6 +801,7 @@ function readfromRosterStaff(){
 
 }
 function rosterCSVGen() {
+
 
     for(var i=0;i<4;i++){
       for(var a=0; a<activites[i].length;a++){
@@ -812,7 +830,7 @@ function StaffrosterCSVGen() {
       CounselorrosterArray.push(activites[p][a].Staff);
     }
   }
-  ReactDOM.render([<CSVDownload data={CounselorrosterArray} target="_blank" />,<button onClick={schedual}>Back to Schedual</button>],document.getElementById("root"));
+  ReactDOM.render([<CSVDownload data={CounselorrosterArray}  target="_blank" />,<button onClick={schedual}>Back to Schedual</button>],document.getElementById("root"));
   //<CSVLink data={CounselorrosterArray} >Download me</CSVLink>;
   // or
 
@@ -824,13 +842,13 @@ export class MyTable extends React.Component {
   //}
   render() {
 
-  s1();
+    s1();
 
     return(
-     
-      <div>
 
-       <p>runs</p>
+        <div>
+
+          <p>runs</p>
         </div>);
   }
 
