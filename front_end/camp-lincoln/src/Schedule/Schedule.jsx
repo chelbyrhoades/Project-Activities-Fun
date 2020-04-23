@@ -15,6 +15,7 @@ let curData1;
 let curData2;
 let curData3;
 let curData4;
+let curData5;
 let w1=true;
 let w2=true;
 let w3=true;
@@ -43,7 +44,8 @@ function go1(){
     generateTable();
     setup();
     fromStaffList();
-    activitySignUps();
+    fromCamperList();
+    //activitySignUps();
     //counselorActivityAssingment(Counselors,activites);
 
 
@@ -72,8 +74,24 @@ const handleForce3 = data => {
 };
 const handleForce4 = data => {
   curData4=(data);
+  ReactDOM.render(reader5,document.getElementById("root"));
+  //go1();
+};
+const handleForce5 = data => {
+  curData5=(data);
+  //ReactDOM.render(reader5,document.getElementById("root"));
   go1();
 };
+const reader5 = (
+    <div className="container">
+      <CSVReader
+          cssClass="react-csv-input"
+          label="Select Staff Placment List"
+          onFileLoaded={handleForce5}
+      />
+
+    </div>
+);
 const reader4 = (
     <div className="container">
       <CSVReader
@@ -114,7 +132,24 @@ const reader1 = (
 
     </div>
 );
+function fromCamperList(){
+  for(var i=0;i<curData5.length;i++){
+    for(var j=2;j<curData5[i].length;j++){
+      activites[curData5[i][0]][curData5[i][1]].Roster.push(curData5[i][j]);
+      if(curData5[i][0]==0){
+        campers[camperHash[curData5[i][j]]].A1=activites[curData5[i][0]][curData5[i][1]].Name;}
+      if(curData5[i][0]==1){
+        campers[camperHash[curData5[i][j]]].A2=activites[curData5[i][0]][curData5[i][1]].Name;}
+      if(curData5[i][0]==2){
+        campers[camperHash[curData5[i][j]]].A3=activites[curData5[i][0]][curData5[i][1]].Name;}
+      if(curData5[i][0]==3){
+        campers[camperHash[curData5[i][j]]].A4=activites[curData5[i][0]][curData5[i][1]].Name;}
+      if(curData5[i][0]==4){
+        campers[camperHash[curData5[i][j]]].A5=activites[curData5[i][0]][curData5[i][1]].Name;}
 
+    }
+  }
+}
 function fromStaffList(){
   for(var i=0;i<curData4.length;i++){
     for(var j=2;j<curData4[i].length;j++){
@@ -752,8 +787,13 @@ function rosterCSVGen() {
 
     for(var i=0;i<4;i++){
       for(var a=0; a<activites[i].length;a++){
-        activites[i][a].Roster.unshift(i,a);//indexing
-        rosterArray.push(activites[i][a].Roster.ID);
+        var t=[i,a];
+        for(var j=0;j<activites[i][a].Roster.length;j++){
+          t.push(activites[i][a].Roster[j].ID);
+        }
+        rosterArray.push(t);
+        //activites[i][a].Roster.unshift(i,a);//indexing
+        //rosterArray.push(activites[i][a].Roster);
       }
 
     }
