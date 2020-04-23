@@ -494,6 +494,7 @@ function schedual(){
       </Container>
     </div>,],document.getElementById('root'));
 }
+        
 function activitySignUps(){
   var i;
   for(i=0;i<campers.length;i++){
