@@ -29,7 +29,7 @@ function go(){
     activitySignUps();
     generateTable();
     setup();
-    }
+  }
 
 
 
@@ -45,13 +45,13 @@ function go1(){
   fromStaffList();
   fromCamperList();
 
-    generateTable();
-    setup();
+  generateTable();
+  setup();
 
 
 
-    //activitySignUps();
-    //counselorActivityAssingment(Counselors,activites);
+  //activitySignUps();
+  //counselorActivityAssingment(Counselors,activites);
 
 
 
@@ -141,24 +141,27 @@ const reader1 = (
 );
 function fromCamperList(){
   for(var i=0;i<curData5.length;i++){
+    let temp=[];
     for(var j=2;j<curData5[i].length;j++){
-      activites[curData5[i][0]][curData5[i][1]].Roster.push(camperHash[curData5[i][j]]);
+     temp.push(campers[camperHash[curData5[i][j]]]);
       //alert( activites[curData5[i][0]][curData5[i][1]].Name);
       if(curData5[i][0]==0){
 
-        campers[camperHash[curData5[i][j]]].A1=activites[curData5[i][0]][curData5[i][1]].Name;
+        campers[camperHash[curData5[i][j]]].A1=activites[curData5[i][0]][curData5[i][1]];
         //alert(campers[camperHash[curData5[i][j]]].A1);
-         }
+      }
       if(curData5[i][0]==1){
-        campers[camperHash[curData5[i][j]]].A2=activites[curData5[i][0]][curData5[i][1]].Name;}
+        campers[camperHash[curData5[i][j]]].A2=activites[curData5[i][0]][curData5[i][1]];}
       if(curData5[i][0]==2){
-        campers[camperHash[curData5[i][j]]].A3=activites[curData5[i][0]][curData5[i][1]].Name;}
+        campers[camperHash[curData5[i][j]]].A3=activites[curData5[i][0]][curData5[i][1]];}
       if(curData5[i][0]==3){
-        campers[camperHash[curData5[i][j]]].A4=activites[curData5[i][0]][curData5[i][1]].Name;}
+        campers[camperHash[curData5[i][j]]].A4=activites[curData5[i][0]][curData5[i][1]];}
       if(curData5[i][0]==4){
-        campers[camperHash[curData5[i][j]]].A5=activites[curData5[i][0]][curData5[i][1]].Name;}
+        campers[camperHash[curData5[i][j]]].A5=activites[curData5[i][0]][curData5[i][1]];}
 
     }
+  // alert(activites[curData5[i][0]][curData5[i][1]].Name);
+    activites[curData5[i][0]][curData5[i][1]].Roster=temp;
   }
 }
 function fromStaffList(){
@@ -320,8 +323,8 @@ function makeActivity(){
 //Activity Assignment Functions Camper Needs to run first
 function counselorActivityAssingment(counselors,acts) {
   // alert("runs");
-  var groupOff=0;
-  //prompt("What group has Time off");
+  var groupOff=prompt("What group has Time off");
+
 
   //fix this make it take into account time off
   //this is incredibly inneficent
@@ -409,7 +412,46 @@ function counselorActivityAssingment(counselors,acts) {
 
 }
 
+function camperActivityAssingmentdemo(Camper, acts, period){
 
+  //loop through the three prefrences for an activity period and place them in an activity that is in that list that has space for them
+  var i;
+  //todo add in a update to counselor
+  var prefrences=[];
+  //Campers Prefrences Are inputed in the prompt menu
+  //while(true) {
+  for (i = 1; i < 4; i++) {
+    prefrences.push(prompt(Camper.ID + " Period " + period + " prefrence " + i + ": "));
+    //prefrences.push(demoTimeSaver(i-1));
+  }
+
+  for (i = 0; i < 3; i++) {
+
+    var j;
+
+    for (j = 0; j < acts[period - 1].length; j++) {
+
+      if (prefrences[i] == acts[period - 1][j].Name) {
+        if (acts[period - 1][j].CurCampNum < acts[period - 1][j].MaxCamperNum) {
+          //var temp;
+          // add camper to the roster of the activity
+          acts[period - 1][j].Roster.push(Camper);
+          //alert(Camper.fName);
+          acts[period - 1][j].CurCampNum = acts[period - 1][j].Roster.length;
+          // return the activity
+          //alert(acts[period-1][j].Name+" "+acts[period-1][j].Roster.length);
+          return acts[period - 1][j];
+        }
+      }
+    }
+
+  }
+  //alert("All Choices full please enter new options.");
+  //}
+
+  //}
+
+}
 function camperActivityAssingment(Camper, acts, period){
 
   //loop through the three prefrences for an activity period and place them in an activity that is in that list that has space for them
@@ -517,25 +559,25 @@ function roster(act){
 
   ReactDOM.render(
       <div><container>
-      <Table>
-        <TableRow><tb ><button onClick={schedual}>Back to Schedual</button></tb></TableRow>
-        <TableRow><th>OB #</th><th>Nickname</th><th>Last Name</th><th>First</th></TableRow>
-        {rs.map(row => (
-            <TableRow key={row.id}>
-              <TableCell>{row.Identity}</TableCell>
-              <TableCell>{row.nN}</TableCell>
-              <TableCell>{row.lN}</TableCell>
-              <TableCell>{row.fN}</TableCell>
+        <Table>
+          <TableRow><tb ><button onClick={schedual}>Back to Schedual</button></tb></TableRow>
+          <TableRow><th>OB #</th><th>Nickname</th><th>Last Name</th><th>First</th></TableRow>
+          {rs.map(row => (
+              <TableRow key={row.id}>
+                <TableCell>{row.Identity}</TableCell>
+                <TableCell>{row.nN}</TableCell>
+                <TableCell>{row.lN}</TableCell>
+                <TableCell>{row.fN}</TableCell>
 
-            </TableRow>
-        ))}
-      </Table></container></div>,document.getElementById('root'));
+              </TableRow>
+          ))}
+        </Table></container></div>,document.getElementById('root'));
 }
 
 function showSchedual(c){
   //alert("runs");
-  let br=React.createElement('br');
-  let br1=React.createElement('br');
+  alert(c.nName);
+  alert(c.A1+c.A5);
   //alert(c.nName);
 
   // eslint-disable-next-line no-undef
@@ -544,6 +586,7 @@ function showSchedual(c){
     <p>ID: {c.ID}</p>, <table><tr><th>Period 1</th><th>Period 2</th><th>Period 3</th><th>Period 4</th><th>Period 5</th></tr>
       <tr><td>{c.A1.Name}</td><td>{c.A2.Name}</td><td>{c.A3.Name}</td><td>{c.A4.Name}</td><td>{c.A5.Name}</td></tr>
     </table>],document.getElementById('root'));
+
   // return (<p>Name</p>);
 
 }
@@ -781,7 +824,9 @@ function schedual(){
 
 function activitySignUps(){
   var i;
-  for(i=0;i<campers.length;i++){
+  campers[1].A1=camperActivityAssingmentdemo(campers[1],activites,1);
+
+  for(i=1;i<campers.length;i++){
     //alert("runs");
     //campers[i].A1={};
     campers[i].A1=camperActivityAssingment(campers[i],activites,1);
@@ -803,24 +848,24 @@ function readfromRosterStaff(){
 function rosterCSVGen() {
 
 
-    for(var i=0;i<4;i++){
-      for(var a=0; a<activites[i].length;a++){
-        var t=[i,a];
-        for(var j=0;j<activites[i][a].Roster.length;j++){
-          t.push(activites[i][a].Roster[j].ID);
-        }
-        rosterArray.push(t);
-        //activites[i][a].Roster.unshift(i,a);//indexing
-        //rosterArray.push(activites[i][a].Roster);
+  for(var i=0;i<5;i++){
+    for(var a=0; a<activites[i].length;a++){
+      var t=[i,a];
+      for(var j=0;j<activites[i][a].Roster.length;j++){
+        t.push(activites[i][a].Roster[j].ID);
       }
-
+      rosterArray.push(t);
+      //activites[i][a].Roster.unshift(i,a);//indexing
+      //rosterArray.push(activites[i][a].Roster);
     }
+
+  }
   ReactDOM.render([<CSVDownload data={rosterArray} target="_blank" />,<button onClick={schedual}>Back to Schedual</button>],document.getElementById("root"));
 
 
 }
 function StaffrosterCSVGen() {
-  counselorActivityAssingment(Counselors,activites);
+  //counselorActivityAssingment(Counselors,activites);
   for(var p=0;p<5;p++){
     for(var a=0;a<activites[p].length;a++){
       activites[p][a].Staff.unshift(p,a);//indexing
