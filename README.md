@@ -12,12 +12,22 @@ TBA
 ## Usage
 The environment for this application is based on a Node.js backend and a React.js front end. 
 ## Instructions
-### Schedualing:
+### Scheduling:
 1: When prompted select the csv file containing a list of counselors, then activity csv file, and then the list of campers.
 
 2: Next select to handle new activity sign ups, or to load up previous data.
 
-3: If previous Data is to be loaded, load up the file containing counselor placements, and then the file containing camper placements.
+3: If previous Data is to be loaded, select the file containing counselor placements, and then the file containing camper placements.
+
+4: To view a camper's schedule either search for a camper's OB # using the search by OB button or click on their name within an activity.
+
+5: To view an activities roster click on the activities name.
+
+6: To view staff roster click staff placement button.
+
+7: When activity placements change click on the generate roster CSV, and generate staff roster CSV buttons, and place downloaded files in program directory.
+
+
 
 ## Authors and Acknowledgements
 Project Manager
