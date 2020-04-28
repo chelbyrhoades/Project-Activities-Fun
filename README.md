@@ -11,7 +11,11 @@ TBA
 
 ## Usage
 The environment for this application is based on a Node.js backend and a React.js front end. 
-
+## Instructions
+Schedualing:
+1: When prompted select the csv file containing a list of counselors, then activity csv file, and then the list of campers.
+2: Next select to handle new activity sign ups, or to load up previous data.
+3: If previous Data is to be loaded, load up the file containing counselor placements, and then the file containing camper placements.
 ## Authors and Acknowledgements
 Project Manager
 
