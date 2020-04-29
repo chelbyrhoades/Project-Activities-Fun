@@ -6,7 +6,15 @@ Project Activities-Fun is a camp managament application in which controls the ac
 This application will be on one admin computer which sorts the campers into activities based on their preferences, as well as keep track of awards given throughout the camp.
 
 ## Installation
-TBA
+Pull from github
+In the terminal:
+Navigate to where the folder was installed.
+```
+ cd front_end/
+ npm install node_modules
+ npm start
+```
+A common error is that the package.json file is missing. In this event, copy the one that is on github by navigating to front_end-> package.json. Make sure that file is inside the front_end folder.
 
 
 ## Usage
