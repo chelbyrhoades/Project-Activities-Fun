@@ -15,7 +15,7 @@ Navigate to where the folder was installed.
  npm start
 ```
 A common error is that the package.json file is missing. In this event, copy the one that is on github by navigating to front_end-> package.json. Make sure that file is inside the front_end folder.
-
+For a full list of dependencies that are required by the project, please navigate to the Insights tab on GitHub and then click on Dependency graph.
 
 ## Usage
 The environment for this application is based on a Node.js backend and a React.js front end. 
